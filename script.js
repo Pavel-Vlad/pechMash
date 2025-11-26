@@ -1,18 +1,26 @@
 window.onload = () => {
-    let mainString = document.getElementById('main');
-    let input = document.querySelector('input');
-    let button = document.querySelector('button');
-    let otvet = document.querySelector('#otvet');
-
-    button.addEventListener('click', () => {
-        let str1 = input.value;
-        for (let i = 0; i < str1.length; i = i + 1) {
-            console.log(str1[i]);
-
+    const validation = new JustValidate('form',
+        {
+            validateBeforeSubmitting: true,
         }
-        otvet.innerText = otvet.innerText + str1;
-    })
+        );
 
-
-
+    validation
+        .addField('#input1', [
+            {
+                rule: 'minLength',
+                value: 3,
+                errorMessage: 'Минимальная длина 3 символа!',
+            }
+        ])
+        .addField('#input3', [
+            {
+                rule: 'required',
+                errorMessage: 'Email обязателен!',
+            },
+            {
+                rule: 'email',
+                errorMessage: 'Email не корректный!',
+            },
+        ]);
 }
